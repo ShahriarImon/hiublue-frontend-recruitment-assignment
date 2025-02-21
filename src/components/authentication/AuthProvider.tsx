@@ -1,5 +1,11 @@
 "use client";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useLayoutEffect,
+  useState,
+} from "react";
 interface AuthInfo {
   isAuthed: boolean;
   token: string;
@@ -13,7 +19,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     isAuthed: false,
     token: "",
   });
-  useEffect(() => {
+  useLayoutEffect(() => {
     setAuthInfo({
       isAuthed: !!localStorage.getItem("token"),
       token: localStorage.getItem("token") || "",
@@ -25,4 +31,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default AuthProvider;
+const useAuth = () => {
+  const authInfo = useContext(AuthContext);
+  return authInfo;
+};
+
+export { AuthProvider, useAuth };

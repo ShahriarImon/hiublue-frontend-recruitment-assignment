@@ -1,4 +1,5 @@
-import AuthProvider from "@/components/authentication/AuthProvider";
+import { AuthProvider } from "@/components/authentication/AuthProvider";
+import { NavDrawerProvider } from "@/components/context/NavDrawerProvider";
 import ThemeProvider from "@/theme/index";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,7 +16,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to
             build upon. */}
             <CssBaseline />
-            <AuthProvider>{props.children}</AuthProvider>
+            <AuthProvider>
+              <NavDrawerProvider>{props.children}</NavDrawerProvider>
+            </AuthProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

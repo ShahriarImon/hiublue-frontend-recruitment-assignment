@@ -1,6 +1,8 @@
 "use client";
 
-import { useAuth } from "./useAuth";
+import { redirect } from "next/navigation";
+import { useLayoutEffect } from "react";
+import { useAuth } from "./AuthProvider";
 
 const withAuth = (Component: any) => {
   interface WithAuthProps {
@@ -11,15 +13,13 @@ const withAuth = (Component: any) => {
     // const token = localStorage.getItem("token");
 
     const authInfo = useAuth();
-    // useEffect(() => {
-    //   if (!token) {
-    //     redirect("/login");
-    //   }
-    // }, []);
-
-    if (!authInfo?.token) {
-      return <>Loading...</>;
-    }
+    useLayoutEffect(() => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        // if (!authInfo?.token) {
+        redirect("/login");
+      }
+    }, []);
 
     return <Component {...props} />;
   };
