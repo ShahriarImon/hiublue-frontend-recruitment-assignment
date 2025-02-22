@@ -1,5 +1,6 @@
 "use client";
 import { Box, Card, Stack } from "@mui/material";
+import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import { Visits, VisitsStat } from "../../views/dashboard-view";
 
@@ -64,9 +65,9 @@ const OfferSentChart = ({
   ];
 
   // Chart options for Offers Sent (Bar Chart)
-  const offersSentOptions = {
+  const offersSentOptions: ApexOptions = {
     chart: {
-      type: "line",
+      type: "line" as "line",
       height: 300,
       toolbar: { show: false },
     },
@@ -86,7 +87,7 @@ const OfferSentChart = ({
       tickAmount: 5,
     },
     stroke: {
-      curve: "smooth", // Makes the line smooth
+      curve: "smooth" as "smooth", // Makes the line smooth
       width: 3,
     },
     colors: ["#000"], // Black line color

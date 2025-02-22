@@ -1,5 +1,6 @@
 "use client";
 import { Box, Card, Stack } from "@mui/material";
+import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import { Visits, VisitsStat } from "../../views/dashboard-view";
 
@@ -66,17 +67,11 @@ const WebsiteVisitChart = ({
   ];
 
   // Process data for Offers Sent Chart
-  const offersSentSeries = visits?.offers_sent && [
-    {
-      name: "Offers Sent",
-      data: orderedDays?.map((day) => visits.offers_sent[day]),
-    },
-  ];
 
   // Chart options for Website Visits (Line Chart)
-  const websiteVisitsOptions = {
+  const websiteVisitsOptions: ApexOptions = {
     chart: {
-      type: "bar",
+      type: "bar" as "bar",
       height: 300,
       toolbar: {
         show: false, // Hide the menu button
@@ -105,7 +100,7 @@ const WebsiteVisitChart = ({
     },
     colors: ["#007867", "#FFAB00"],
     legend: {
-      position: "top",
+      position: "top" as "top",
       horizontalAlign: "right",
 
       fontWeight: 550,
@@ -113,30 +108,6 @@ const WebsiteVisitChart = ({
         shape: "circle", // Change legend shape to circle
       },
     },
-  };
-
-  // Chart options for Offers Sent (Bar Chart)
-  const offersSentOptions = {
-    chart: {
-      type: "bar",
-      height: 350,
-    },
-    plotOptions: {
-      bar: {
-        borderRadius: 4,
-        horizontal: false,
-      },
-    },
-    xaxis: {
-      categories: categories,
-    },
-    yaxis: {
-      title: { text: "Offers Sent" },
-      min: 0,
-      max: 100,
-      tickAmount: 5,
-    },
-    colors: ["#FFAB00"],
   };
 
   return (
