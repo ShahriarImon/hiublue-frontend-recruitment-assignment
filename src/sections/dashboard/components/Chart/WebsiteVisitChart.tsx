@@ -4,37 +4,7 @@ import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import { Visits, VisitsStat } from "../../views/dashboard-view";
 
-// Dynamically import ApexCharts to avoid SSR issues
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-
-// interface DeviceCount {
-//   desktop: number;
-//   mobile: number;
-// }
-
-// interface VisitsStat {
-//   monday: DeviceCount;
-//   tuesday: DeviceCount;
-//   wednesday: DeviceCount;
-//   thursday: DeviceCount;
-//   friday: DeviceCount;
-//   saturday: DeviceCount;
-//   sunday: DeviceCount;
-// }
-// interface OfferSentStat {
-//   monday: number;
-//   tuesday: number;
-//   wednesday: number;
-//   thursday: number;
-//   friday: number;
-//   saturday: number;
-//   sunday: number;
-// }
-
-// interface Visits {
-//   website_visits: VisitsStat;
-//   offers_sent: OfferSentStat;
-// }
 
 const WebsiteVisitChart = ({
   filter,

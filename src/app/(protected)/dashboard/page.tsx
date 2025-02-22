@@ -1,3 +1,4 @@
+import OfferTable from "@/sections/dashboard/components/offerTable/OfferTable";
 import dynamic from "next/dynamic";
 // import DashboardView from "@/sections/dashboard/views/dashboard-view";
 const DashboardView = dynamic(
@@ -8,7 +9,11 @@ const DashboardView = dynamic(
 );
 
 const Dashboard = () => {
-  return <DashboardView />;
+  return (
+    <DashboardView>
+      <OfferTable />
+    </DashboardView>
+  );
 };
 
 export default Dashboard;

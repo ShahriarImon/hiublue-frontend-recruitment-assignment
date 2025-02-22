@@ -10,7 +10,7 @@ import {
   Stack,
 } from "@mui/material";
 import dynamic from "next/dynamic";
-import { Suspense, useLayoutEffect, useState } from "react";
+import { ReactNode, Suspense, useLayoutEffect, useState } from "react";
 // import OfferSentChart from "../components/Chart/OfferSentChart";
 // import WebsiteVisitChart from "../components/Chart/WebsiteVisitChart";
 const Summery = dynamic(() => import("../components/Summery"), {
@@ -58,7 +58,7 @@ export interface Visits {
   offers_sent: OfferSentStat;
 }
 
-export default function DashboardView() {
+export default function DashboardView({ children }: { children: ReactNode }) {
   const [filter, setFilter] = useState<string>("this-week");
 
   const handleFilter = (event: SelectChangeEvent) => {

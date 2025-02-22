@@ -46,8 +46,13 @@ const DrawerComp = ({
           { text: "Dashboard", link: "/dashboard.svg", href: "/dashboard" },
           { text: "Onboarding", link: "/onBoarding.svg", href: "/onboarding" },
         ].map((item, index) => (
-          <Link href={item?.href}>
-            {" "}
+          <Link
+            href={item?.href}
+            style={{
+              textDecoration: "none",
+              color: "inherit", // optional if you also want to inherit text color
+            }}
+          >
             <ListItem key={item?.text} disablePadding>
               <ListItemButton>
                 <ListItemIcon sx={{ minWidth: "36px" }}>
@@ -60,7 +65,6 @@ const DrawerComp = ({
                       fontSize: "14px",
                       fontWeight: 500,
                       color: "var(--text-secondary, rgba(99, 115, 129, 1))",
-                      // fontWeight: "bold",
                     },
                   }}
                 />
