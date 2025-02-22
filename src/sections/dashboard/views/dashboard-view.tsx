@@ -17,13 +17,13 @@ const Summery = dynamic(() => import("../components/Summery"), {
   ssr: false,
 });
 const WebsiteVisitChart = dynamic(
-  () => import("../components/chart/WebsiteVisitChart"),
+  () => import("../components/Chart/WebsiteVisitChart"),
   {
     ssr: false,
   }
 );
 const OfferSentChart = dynamic(
-  () => import("../components/chart/OfferSentChart"),
+  () => import("../components/Chart/OfferSentChart"),
   {
     ssr: false,
   }
