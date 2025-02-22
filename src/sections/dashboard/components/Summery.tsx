@@ -20,11 +20,9 @@ const Summery = ({ filter }: { filter: string }) => {
     `dashboard/summary?filter=${filter}`,
     { cache: "no-store" }
   );
-  console.log("summaryService:", summaryService);
 
   useEffect(() => {
     summaryService.get().then((data) => {
-      console.log("data2323:", data);
       setSummery(data);
     });
   }, [filter]);
@@ -36,7 +34,6 @@ const Summery = ({ filter }: { filter: string }) => {
       const previousValue = summery.previous[key];
       return { key, currentValue, previousValue };
     });
-  console.log("stats-00121:", stats);
 
   return (
     <Grid2 container spacing={3}>

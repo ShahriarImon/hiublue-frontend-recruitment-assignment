@@ -1,14 +1,62 @@
 "use client";
 
+import APIClient from "@/services/apiClient";
 import {
   FormControl,
+  Grid2,
   MenuItem,
   Select,
   SelectChangeEvent,
   Stack,
 } from "@mui/material";
-import { useState } from "react";
-import Summery from "../components/Summery";
+import dynamic from "next/dynamic";
+import { useLayoutEffect, useState } from "react";
+// import OfferSentChart from "../components/Chart/OfferSentChart";
+// import WebsiteVisitChart from "../components/Chart/WebsiteVisitChart";
+const Summery = dynamic(() => import("../components/Summery"), {
+  ssr: false,
+});
+const WebsiteVisitChart = dynamic(
+  () => import("../components/Chart/WebsiteVisitChart"),
+  {
+    ssr: false,
+  }
+);
+const OfferSentChart = dynamic(
+  () => import("../components/Chart/OfferSentChart"),
+  {
+    ssr: false,
+  }
+);
+
+export interface DeviceCount {
+  desktop: number;
+  mobile: number;
+}
+
+export interface VisitsStat {
+  monday: DeviceCount;
+  tuesday: DeviceCount;
+  wednesday: DeviceCount;
+  thursday: DeviceCount;
+  friday: DeviceCount;
+  saturday: DeviceCount;
+  sunday: DeviceCount;
+}
+export interface OfferSentStat {
+  monday: number;
+  tuesday: number;
+  wednesday: number;
+  thursday: number;
+  friday: number;
+  saturday: number;
+  sunday: number;
+}
+
+export interface Visits {
+  website_visits: VisitsStat;
+  offers_sent: OfferSentStat;
+}
 
 export default function DashboardView() {
   const [filter, setFilter] = useState<string>("this-week");
@@ -17,6 +65,21 @@ export default function DashboardView() {
     setFilter(event.target.value);
   };
 
+  const [visits, setVisits] = useState<Visits>({} as Visits);
+  console.log("visitsqw:", visits);
+
+  const visitService = new APIClient<Visits>(
+    `dashboard/stat?filter=${filter}`,
+    { cache: "no-store" }
+  );
+  console.log("visitService:", visitService);
+
+  useLayoutEffect(() => {
+    visitService.get().then((data) => {
+      console.log("data232332323:", data);
+      setVisits(data);
+    });
+  }, [filter]);
   return (
     <Stack
       direction={"column"}
@@ -53,8 +116,20 @@ export default function DashboardView() {
           </Select>
         </FormControl>
       </Stack>
-
       <Summery filter={filter} />
+
+      <Grid2 container spacing={3}>
+        <Grid2 size={6}>
+          {visits?.website_visits && (
+            <WebsiteVisitChart filter={filter} visits={visits} />
+          )}
+        </Grid2>
+        <Grid2 size={6}>
+          {visits?.offers_sent && (
+            <OfferSentChart filter={filter} visits={visits} />
+          )}
+        </Grid2>
+      </Grid2>
     </Stack>
   );
 }
