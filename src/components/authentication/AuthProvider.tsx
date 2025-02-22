@@ -10,9 +10,15 @@ interface AuthInfo {
   isAuthed: boolean;
   token: string;
 }
-export const AuthContext = createContext<AuthInfo>({
+interface AuthInfoContext {
+  isAuthed: boolean;
+  token: string;
+  setAuthInfo: (authInfo: AuthInfo) => void;
+}
+export const AuthContext = createContext<AuthInfoContext>({
   isAuthed: false,
   token: "",
+  setAuthInfo: () => {},
 });
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [authInfo, setAuthInfo] = useState<AuthInfo>({
@@ -27,7 +33,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ ...authInfo, setAuthInfo }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
