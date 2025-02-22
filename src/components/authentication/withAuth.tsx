@@ -9,18 +9,23 @@ const withAuth = (Component: any) => {
     [key: string]: any;
   }
 
-  const AuthenticatedComponent: React.FC<any> = (props) => {
+  const AuthenticatedComponent: React.FC<WithAuthProps> = (props) => {
     const pathname = usePathname();
     const router = useRouter();
-    console.log("router2323:", router);
     console.log("pathname:", pathname);
     const authInfo = useAuth();
     useLayoutEffect(() => {
       const token = localStorage.getItem("token");
-      if (!token) {
-        redirect("/login");
+      if (pathname !== "/login") {
+        if (!token) {
+          redirect("/login");
+        }
+      } else {
+        if (token && authInfo.isAuthed) {
+          router.push("/dashboard");
+        }
       }
-    }, []);
+    }, [authInfo]);
 
     return <Component {...props} />;
   };

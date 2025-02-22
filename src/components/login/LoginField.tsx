@@ -13,10 +13,11 @@ import Link from "@mui/material/Link";
 import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import { useRouter } from "next/navigation";
-import { SyntheticEvent, useLayoutEffect, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useAuth } from "../authentication/AuthProvider";
+import withAuth from "../authentication/withAuth";
 
 const loginSchema = yup.object().shape({
   email: yup
@@ -37,12 +38,12 @@ const LoginField = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const authInfo = useAuth();
 
-  useLayoutEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token && authInfo.isAuthed) {
-      router.push("/dashboard");
-    }
-  }, [authInfo.isAuthed]);
+  //   useLayoutEffect(() => {
+  //     const token = localStorage.getItem("token");
+  //     if (token && authInfo.isAuthed) {
+  //       router.push("/dashboard");
+  //     }
+  //   }, [authInfo.isAuthed]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -188,4 +189,4 @@ const LoginField = () => {
   );
 };
 
-export default LoginField;
+export default withAuth(LoginField);

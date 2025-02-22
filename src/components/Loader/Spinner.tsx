@@ -1,9 +1,9 @@
 import { CircularProgress, Stack } from "@mui/material";
 
-const Loading = () => {
+const Spinner = () => {
   return (
     <Stack
-      sx={{ color: "grey.500", width: "100%", height: "80vh" }}
+      sx={{ color: "grey.500", width: "100%", height: "100vh" }}
       spacing={2}
       direction="row"
       justifyContent={"center"}
@@ -14,4 +14,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default Spinner;
