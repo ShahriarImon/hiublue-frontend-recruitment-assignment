@@ -1,5 +1,5 @@
-import { Theme } from '@mui/material/styles';
-import { radioClasses, RadioProps } from '@mui/material/Radio';
+import { radioClasses, RadioProps } from "@mui/material/Radio";
+import { Theme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -19,8 +19,12 @@ export function radio(theme: Theme) {
           const { color } = ownerState;
 
           return {
+            color: "gray",
+            "&.Mui-checked": {
+              color: "#00A76F",
+            },
             padding: theme.spacing(1),
-            ...(color === 'default' && {
+            ...(color === "default" && {
               [`&.${radioClasses.checked}`]: {
                 color: theme.palette.text.primary,
               },
