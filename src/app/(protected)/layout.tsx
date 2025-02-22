@@ -1,15 +1,11 @@
 import DrawerComp from "@/components/drawer/DrawerComp";
 import Navbar from "@/components/navbar/Navbar";
-
 import Box from "@mui/material/Box";
 import * as React from "react";
-
-const drawerWidth = 280;
-
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
-
+const drawerWidth = 280;
 function AuthLayout(props: AuthLayoutProps) {
   return (
     <Box sx={{ display: "flex" }}>
@@ -28,14 +24,6 @@ function AuthLayout(props: AuthLayoutProps) {
         {props.children}
       </Box>
     </Box>
-    // <Grid container spacing={2}>
-    //   <Grid size={{ xs: 6, md: 2.16 }}>
-    //     <div>xs=8</div>
-    //   </Grid>
-    //   <Grid size={{ xs: 6, md: 9.84 }} sx={{ backgroundColor: "primary.main" }}>
-    //     {props.children}
-    //   </Grid>
-    // </Grid>
   );
 }
 
