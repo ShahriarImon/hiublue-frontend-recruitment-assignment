@@ -8,6 +8,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 import TemporaryDrawer from "./TemporaryDrawer";
 
 const DrawerComp = ({
@@ -42,27 +43,30 @@ const DrawerComp = ({
       </div>
       <List>
         {[
-          { text: "Dashboard", link: "/dashboard.svg" },
-          { text: "Onboarding", link: "/onBoarding.svg" },
+          { text: "Dashboard", link: "/dashboard.svg", href: "/dashboard" },
+          { text: "Onboarding", link: "/onBoarding.svg", href: "/onboarding" },
         ].map((item, index) => (
-          <ListItem key={item?.text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon sx={{ minWidth: "36px" }}>
-                <Image src={item?.link} width={24} height={24} alt="" />
-              </ListItemIcon>
-              <ListItemText
-                primary={item?.text}
-                sx={{
-                  "& .MuiTypography-root": {
-                    fontSize: "14px",
-                    fontWeight: 500,
-                    color: "var(--text-secondary, rgba(99, 115, 129, 1))",
-                    // fontWeight: "bold",
-                  },
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
+          <Link href={item?.href}>
+            {" "}
+            <ListItem key={item?.text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ minWidth: "36px" }}>
+                  <Image src={item?.link} width={24} height={24} alt="" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={item?.text}
+                  sx={{
+                    "& .MuiTypography-root": {
+                      fontSize: "14px",
+                      fontWeight: 500,
+                      color: "var(--text-secondary, rgba(99, 115, 129, 1))",
+                      // fontWeight: "bold",
+                    },
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>{" "}
+          </Link>
         ))}
       </List>
     </div>

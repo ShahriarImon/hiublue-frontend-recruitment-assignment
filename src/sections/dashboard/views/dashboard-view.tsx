@@ -10,20 +10,20 @@ import {
   Stack,
 } from "@mui/material";
 import dynamic from "next/dynamic";
-import { useLayoutEffect, useState } from "react";
+import { Suspense, useLayoutEffect, useState } from "react";
 // import OfferSentChart from "../components/Chart/OfferSentChart";
 // import WebsiteVisitChart from "../components/Chart/WebsiteVisitChart";
 const Summery = dynamic(() => import("../components/Summery"), {
   ssr: false,
 });
 const WebsiteVisitChart = dynamic(
-  () => import("../components/Chart/WebsiteVisitChart"),
+  () => import("../components/chart/WebsiteVisitChart"),
   {
     ssr: false,
   }
 );
 const OfferSentChart = dynamic(
-  () => import("../components/Chart/OfferSentChart"),
+  () => import("../components/chart/OfferSentChart"),
   {
     ssr: false,
   }
@@ -121,12 +121,16 @@ export default function DashboardView() {
       <Grid2 container spacing={3}>
         <Grid2 size={6}>
           {visits?.website_visits && (
-            <WebsiteVisitChart filter={filter} visits={visits} />
+            <Suspense fallback={<p>Loading...</p>}>
+              <WebsiteVisitChart filter={filter} visits={visits} />
+            </Suspense>
           )}
         </Grid2>
         <Grid2 size={6}>
           {visits?.offers_sent && (
-            <OfferSentChart filter={filter} visits={visits} />
+            <Suspense fallback={<p>Loading...</p>}>
+              <OfferSentChart filter={filter} visits={visits} />
+            </Suspense>
           )}
         </Grid2>
       </Grid2>
